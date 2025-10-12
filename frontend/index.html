@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognitive Reframer - Transform Your Thoughts</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"/>
+                    <path d="M10 16 L14 20 L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h1>Cognitive Reframer</h1>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-view="reframe">Reframe</button>
+                <button class="nav-btn" data-view="history">History</button>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Reframe View -->
+            <section id="reframe-view" class="view active">
+                <div class="hero">
+                    <h2>Transform stuck thoughts into actionable insights</h2>
+                    <p class="subtitle">Using evidence-based mental models to reframe stress and find clarity</p>
+                </div>
+
+                <div class="input-section card">
+                    <label for="thought-input" class="input-label">What's on your mind?</label>
+                    <textarea 
+                        id="thought-input" 
+                        class="thought-input" 
+                        placeholder="e.g., I'm worried the presentation will be a disaster..."
+                        maxlength="500"
+                        rows="4"
+                    ></textarea>
+                    <div class="input-footer">
+                        <span class="char-count"><span id="char-count">0</span>/500</span>
+                        
+                        <div class="tone-selector">
+                            <label for="tone">Tone:</label>
+                            <select id="tone" class="tone-select">
+                                <option value="gentle">Gentle & Supportive</option>
+                                <option value="direct">Direct & Practical</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button id="reframe-btn" class="btn btn-primary" disabled>
+                        <span class="btn-text">Generate Reframes</span>
+                        <span class="btn-loader" style="display: none;">
+                            <svg class="spinner" viewBox="0 0 50 50">
+                                <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="5"></circle>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Results Section -->
+                <div id="results-section" class="results-section" style="display: none;">
+                    <div class="results-header">
+                        <h3>Your Reframes</h3>
+                        <p class="original-thought">Original: "<span id="original-thought-text"></span>"</p>
+                    </div>
+
+                    <div id="reframes-container" class="reframes-grid">
+                        <!-- Reframes will be inserted here -->
+                    </div>
+
+                    <div class="results-footer">
+                        <div class="summary-card">
+                            <strong>Summary:</strong>
+                            <p id="summary-text"></p>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button id="save-btn" class="btn btn-secondary">
+                                💾 Save to Memory
+                            </button>
+                            <button id="schedule-btn" class="btn btn-secondary">
+                                📅 Schedule Follow-up
+                            </button>
+                            <button id="new-reframe-btn" class="btn btn-outline">
+                                ↻ New Reframe
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Safety Message (shown when needed) -->
+                <div id="safety-message" class="safety-message" style="display: none;">
+                    <div class="safety-icon">⚠️</div>
+                    <div class="safety-content">
+                        <h4>We're concerned about you</h4>
+                        <p id="safety-message-text"></p>
+                        <div class="crisis-resources">
+                            <strong>Crisis Resources:</strong>
+                            <ul id="crisis-resources-list"></ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History View -->
+            <section id="history-view" class="view">
+                <div class="history-header">
+                    <h2>Your Reframe History</h2>
+                    <p class="subtitle">Review past insights and track your progress</p>
+                </div>
+
+                <div id="history-loading" class="loading-state">
+                    <svg class="spinner" viewBox="0 0 50 50">
+                        <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="5"></circle>
+                    </svg>
+                    <p>Loading history...</p>
+                </div>
+
+                <div id="history-container" class="history-container">
+                    <!-- History items will be inserted here -->
+                </div>
+
+                <div id="history-empty" class="empty-state" style="display: none;">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                        <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2" opacity="0.2"/>
+                        <path d="M32 20 L32 32 L40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <h3>No reframes yet</h3>
+                    <p>Start by creating your first reframe above!</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>
+                <strong>⚠️ Important:</strong> This is a cognitive toolkit, not therapy or medical advice.
+                If you're in crisis, please contact:
+                <a href="tel:988">988 (US Suicide Prevention)</a> |
+                <a href="sms:741741">Text HOME to 741741 (Crisis Text Line)</a>
+            </p>
+            <p class="footer-credits">
+                Built with <a href="https://aws.amazon.com/bedrock/" target="_blank">AWS Bedrock</a> for the 
+                <a href="https://aws-agent-hackathon.devpost.com/" target="_blank">AWS AI Agent Global Hackathon</a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+

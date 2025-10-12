@@ -1,0 +1,145 @@
+{
+  "successful_reframe": {
+    "input": "I'm worried the presentation will be a disaster",
+    "model_selection": ["Premortem", "Scaling"],
+    "reframes": [
+      {
+        "model": "Premortem",
+        "reframe": "Imagine the presentation went badly—what specifically happened? Prepare for those scenarios now.",
+        "explanation": "Premortem identifies concrete risks ahead of time so you can address them proactively.",
+        "action_steps": [
+          "List 3 things that could go wrong in the presentation",
+          "Rehearse responses to each scenario for 10 minutes",
+          "Prepare a fallback line if you lose your place"
+        ]
+      },
+      {
+        "model": "Scaling",
+        "reframe": "Zoom out: how important will this presentation feel in 6 months? Focus on learning, not perfection.",
+        "explanation": "Scaling helps reduce emotional weight by expanding time perspective.",
+        "action_steps": [
+          "Write down one learning goal for the presentation (not perfection)",
+          "Remind yourself of a past presentation that felt scary but turned out fine"
+        ]
+      }
+    ],
+    "summary": "Prepare for realistic scenarios and remember this is one step in a longer journey.",
+    "follow_up": "24 hours"
+  },
+  
+  "launch_failure_fear": {
+    "input": "I'm sure the launch will fail and it'll be a disaster",
+    "model_selection": ["Inversion", "Dichotomy of Control"],
+    "reframes": [
+      {
+        "model": "Inversion",
+        "reframe": "Instead of imagining failure, list the fastest ways to fail and stop doing those things.",
+        "explanation": "Inversion helps identify avoidable errors by thinking backward from worst outcomes.",
+        "action_steps": [
+          "List top 3 actions that would guarantee launch failure",
+          "Assign a mitigation plan for each failure mode",
+          "Schedule 30-minute check-in to review mitigations"
+        ]
+      },
+      {
+        "model": "Dichotomy of Control",
+        "reframe": "Separate what you control (your task list) from what you don't (external dependencies). Focus on the controllables first.",
+        "explanation": "This reduces anxiety by directing energy toward elements you can directly change.",
+        "action_steps": [
+          "Block 2 hours to complete 1 high-impact task you control",
+          "Email stakeholders for clarity on external blockers"
+        ]
+      }
+    ],
+    "summary": "Focus on what you can directly change and remove known failure paths.",
+    "follow_up": "48 hours"
+  },
+  
+  "decision_paralysis": {
+    "input": "I can't decide which job offer to take",
+    "model_selection": ["Cost-Benefit", "First Principles"],
+    "reframes": [
+      {
+        "model": "Cost-Benefit",
+        "reframe": "Make a two-column list: concrete benefits vs. concrete costs for each offer.",
+        "explanation": "Explicitly comparing trade-offs reduces decision fog and makes patterns visible.",
+        "action_steps": [
+          "Create a spreadsheet with columns: Role, Salary, Growth, Culture, Location",
+          "Score each offer 1-10 on dimensions that matter most to you",
+          "Identify which offer wins on your top 3 priorities"
+        ]
+      },
+      {
+        "model": "First Principles",
+        "reframe": "Strip away prestige and expectations. What do you fundamentally want from work right now?",
+        "explanation": "First principles thinking cuts through noise to reveal core priorities.",
+        "action_steps": [
+          "Write down 3 non-negotiable needs (e.g., learning, flexibility, compensation)",
+          "Compare which offer better satisfies those needs",
+          "Consider which choice you'd defend to yourself in 5 years"
+        ]
+      }
+    ],
+    "summary": "Use structured comparison and fundamental priorities to cut through decision paralysis.",
+    "follow_up": "48 hours"
+  },
+  
+  "imposter_syndrome": {
+    "input": "Everyone will realize I'm a fraud and don't belong here",
+    "model_selection": ["5 Whys", "Outcome Forecasting"],
+    "reframes": [
+      {
+        "model": "5 Whys",
+        "reframe": "Ask: Why do I feel like a fraud? Keep asking 'why' until you reach the root belief.",
+        "explanation": "The 5 Whys technique uncovers underlying assumptions that may not be true.",
+        "action_steps": [
+          "Write 'I feel like a fraud' at the top. Ask why. Write the answer.",
+          "Ask why again for that answer. Repeat 3-5 times.",
+          "Identify which of those 'reasons' are actually facts vs. feelings"
+        ]
+      },
+      {
+        "model": "Outcome Forecasting",
+        "reframe": "What's the realistic best, worst, and most likely outcome if someone doubts your abilities?",
+        "explanation": "Forecasting outcomes reduces catastrophizing by revealing likely scenarios.",
+        "action_steps": [
+          "Write the absolute worst case (very unlikely)",
+          "Write the most likely case (probably minor or nothing)",
+          "Notice how the worst case is dramatic but improbable"
+        ]
+      }
+    ],
+    "summary": "Dig beneath surface feelings and assess realistic outcomes to defuse imposter fears.",
+    "follow_up": "24 hours"
+  },
+  
+  "procrastination": {
+    "input": "I keep putting off this task and it's getting worse",
+    "model_selection": ["Scaling", "5 Whys"],
+    "reframes": [
+      {
+        "model": "Scaling",
+        "reframe": "Break the task down into the smallest possible first step (5-10 minutes).",
+        "explanation": "Scaling down reduces activation energy and makes starting easier.",
+        "action_steps": [
+          "Identify one micro-task you could finish in under 10 minutes",
+          "Set a timer for that task and commit to just starting",
+          "After completing it, decide if you want to continue or stop"
+        ]
+      },
+      {
+        "model": "5 Whys",
+        "reframe": "Ask why you're avoiding this task. Keep asking why to find the real blocker.",
+        "explanation": "Understanding the root cause of procrastination helps you address the real issue.",
+        "action_steps": [
+          "Write 'I'm avoiding this task' and ask why",
+          "Continue asking why for each answer 3-5 times",
+          "Address the root cause (e.g., fear, unclear requirements, lack of energy)"
+        ]
+      }
+    ],
+    "summary": "Scale down the task and uncover the real reason you're avoiding it.",
+    "follow_up": "24 hours"
+  }
+}
+
