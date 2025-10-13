@@ -202,12 +202,15 @@ Set these in AWS Lambda console or `template.yaml`:
 
 ### Model Selection
 
-Supported Bedrock models:
-- `anthropic.claude-v2` (recommended for reasoning)
-- `anthropic.claude-instant-v1` (faster, cheaper)
-- `amazon.titan-text-express-v1` (AWS native)
+**Currently Deployed:** `amazon.titan-text-express-v1` ✅
 
-Change in `template.yaml` under `ReframeLambda` environment variables.
+Supported Bedrock models:
+- `amazon.titan-text-express-v1` (currently deployed - AWS native, working)
+- `anthropic.claude-3-5-sonnet-20240620-v1:0` (upgrade when access approved)
+- `anthropic.claude-3-haiku-20240307-v1:0` (fast and cheap)
+- `anthropic.claude-v2` (legacy support)
+
+To change model: Edit `infra/template.yaml` line 90, then redeploy with `sam deploy`.
 
 ---
 
@@ -491,3 +494,27 @@ MIT License - See [LICENSE](LICENSE) file for details
 ---
 
 **Built for AWS AI Agent Global Hackathon 2025** 🚀
+
+---
+
+## 🌐 Live Demo
+
+**Frontend:** http://cognitive-reframer-frontend-374666742520.s3-website-us-east-1.amazonaws.com  
+**API Endpoint:** https://nw0ktqzscb.execute-api.us-east-1.amazonaws.com/prod  
+**AWS Region:** us-east-1  
+**Status:** ✅ Deployed and Operational  
+
+---
+
+## ⚡ Quick Test
+
+```bash
+curl -X POST https://nw0ktqzscb.execute-api.us-east-1.amazonaws.com/prod/reframe \
+  -H "Content-Type: application/json" \
+  -d '{
+    "action": "reframe",
+    "user_id": "demo",
+    "input": "I am worried about my presentation tomorrow",
+    "tone": "gentle"
+  }'
+```

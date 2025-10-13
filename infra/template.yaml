@@ -9,7 +9,6 @@ Globals:
     Runtime: python3.11
     Environment:
       Variables:
-        AWS_REGION: !Ref AWS::Region
         REFRAMES_TABLE: !Ref ReframesTable
         USERS_TABLE: !Ref UsersTable
         REMINDERS_TABLE: !Ref RemindersTable
@@ -88,7 +87,7 @@ Resources:
       Handler: app.lambda_handler
       Environment:
         Variables:
-          BEDROCK_MODEL_ID: anthropic.claude-v2
+          BEDROCK_MODEL_ID: amazon.titan-text-express-v1
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref ReframesTable

@@ -9,7 +9,7 @@ import boto3
 from typing import Dict, Any, List
 from datetime import datetime
 
-dynamodb = boto3.resource('dynamodb', region_name=os.environ.get('AWS_REGION', 'us-east-1'))
+dynamodb = boto3.resource('dynamodb', region_name=os.environ.get('AWS_DEFAULT_REGION', 'us-east-1'))
 REFRAMES_TABLE = os.environ.get('REFRAMES_TABLE', 'CognitiveReframer-Reframes')
 
 

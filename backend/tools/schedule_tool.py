@@ -9,9 +9,9 @@ import boto3
 from typing import Dict, Any
 from datetime import datetime, timedelta
 
-sns = boto3.client('sns', region_name=os.environ.get('AWS_REGION', 'us-east-1'))
-eventbridge = boto3.client('events', region_name=os.environ.get('AWS_REGION', 'us-east-1'))
-dynamodb = boto3.resource('dynamodb', region_name=os.environ.get('AWS_REGION', 'us-east-1'))
+sns = boto3.client('sns', region_name=os.environ.get('AWS_DEFAULT_REGION', 'us-east-1'))
+eventbridge = boto3.client('events', region_name=os.environ.get('AWS_DEFAULT_REGION', 'us-east-1'))
+dynamodb = boto3.resource('dynamodb', region_name=os.environ.get('AWS_DEFAULT_REGION', 'us-east-1'))
 
 REMINDERS_TABLE = os.environ.get('REMINDERS_TABLE', 'CognitiveReframer-Reminders')
 

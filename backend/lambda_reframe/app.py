@@ -11,8 +11,9 @@ from typing import Dict, Any, List
 from botocore.exceptions import ClientError
 
 # Initialize AWS clients
-bedrock_runtime = boto3.client('bedrock-runtime', region_name=os.environ.get('AWS_REGION', 'us-east-1'))
-dynamodb = boto3.resource('dynamodb', region_name=os.environ.get('AWS_REGION', 'us-east-1'))
+# Lambda provides AWS_DEFAULT_REGION automatically
+bedrock_runtime = boto3.client('bedrock-runtime', region_name=os.environ.get('AWS_DEFAULT_REGION', 'us-east-1'))
+dynamodb = boto3.resource('dynamodb', region_name=os.environ.get('AWS_DEFAULT_REGION', 'us-east-1'))
 
 # Environment configuration
 MODEL_ID = os.environ.get('BEDROCK_MODEL_ID', 'anthropic.claude-v2')
@@ -284,21 +285,48 @@ def invoke_bedrock_reframe(system_prompt: str, user_input: str) -> str:
     """
     Invoke Amazon Bedrock to generate reframes
     Returns raw model output (should be JSON string)
+    Supports both Claude v2 (legacy) and Claude 3+ (Messages API)
     """
     # Construct the full prompt
     full_prompt = f"{system_prompt}\n\nUser input: {user_input}\n\nJSON output:"
     
-    # Bedrock API call structure varies by model
-    # For Claude v2 (Anthropic), use this format:
-    request_body = {
-        "prompt": f"\n\nHuman: {full_prompt}\n\nAssistant:",
-        "max_tokens_to_sample": 1024,
-        "temperature": 0.3,
-        "top_p": 0.9,
-        "stop_sequences": ["\n\nHuman:"]
-    }
-    
     try:
+        # Check model type and use appropriate API format
+        if 'amazon.titan' in MODEL_ID.lower():
+            # Use Titan API format
+            request_body = {
+                "inputText": full_prompt,
+                "textGenerationConfig": {
+                    "maxTokenCount": 2048,
+                    "temperature": 0.3,
+                    "topP": 0.9,
+                    "stopSequences": []
+                }
+            }
+        elif 'claude-3' in MODEL_ID.lower() or 'claude-sonnet-4' in MODEL_ID.lower():
+            # Use Messages API for Claude 3+
+            request_body = {
+                "anthropic_version": "bedrock-2023-05-31",
+                "max_tokens": 2048,
+                "temperature": 0.3,
+                "top_p": 0.9,
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": full_prompt
+                    }
+                ]
+            }
+        else:
+            # Use legacy format for Claude v2
+            request_body = {
+                "prompt": f"\n\nHuman: {full_prompt}\n\nAssistant:",
+                "max_tokens_to_sample": 1024,
+                "temperature": 0.3,
+                "top_p": 0.9,
+                "stop_sequences": ["\n\nHuman:"]
+            }
+        
         response = bedrock_runtime.invoke_model(
             modelId=MODEL_ID,
             body=json.dumps(request_body)
@@ -306,14 +334,19 @@ def invoke_bedrock_reframe(system_prompt: str, user_input: str) -> str:
         
         response_body = json.loads(response['body'].read())
         
-        # Extract text based on model type
-        if 'anthropic' in MODEL_ID.lower():
-            output_text = response_body.get('completion', '')
-        elif 'amazon.titan' in MODEL_ID.lower():
+        # Extract text based on model type and response format
+        if 'amazon.titan' in MODEL_ID.lower():
+            # Titan format: {"results": [{"outputText": "..."}]}
             output_text = response_body.get('results', [{}])[0].get('outputText', '')
+        elif 'content' in response_body:
+            # Claude 3+ Messages API format
+            output_text = response_body['content'][0]['text']
+        elif 'completion' in response_body:
+            # Claude v2 legacy format
+            output_text = response_body['completion']
         else:
-            # Fallback: try common response keys
-            output_text = response_body.get('completion') or response_body.get('outputText') or str(response_body)
+            # Fallback: try to find text content
+            output_text = str(response_body)
         
         print(f"Bedrock raw response: {output_text}")
         return output_text.strip()

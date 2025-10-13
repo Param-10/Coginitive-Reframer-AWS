@@ -4,7 +4,7 @@
  */
 
 // Configuration
-const API_ENDPOINT = 'API_ENDPOINT_PLACEHOLDER'; // Will be replaced during deployment
+const API_ENDPOINT = 'https://nw0ktqzscb.execute-api.us-east-1.amazonaws.com/prod';
 const USER_ID = 'demo_user_' + Math.random().toString(36).substring(7); // Demo user ID
 
 // State
